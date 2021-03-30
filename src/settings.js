@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'RBAC Lite',
+  title: 'RBAC权限系统',
 
   /**
    * @type {boolean} true | false

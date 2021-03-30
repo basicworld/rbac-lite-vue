@@ -36,9 +36,7 @@ router.beforeEach(async(to, from, next) => {
           const { roles } = await store.dispatch('user/getInfo')
           // 服务器请求动态路由信息
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-          console.log('动态路由:', accessRoutes)
           router.addRoutes(accessRoutes)
-          console.log('所有路由:', router)
 
           next({ ...to, replace: true })
         } catch (error) {

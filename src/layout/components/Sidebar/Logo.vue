@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      title: 'RBAC Lite System',
+      title: 'RBAC权限系统',
       logo: 'logo.png'
     }
   }
