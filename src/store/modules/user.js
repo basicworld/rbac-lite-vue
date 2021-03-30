@@ -31,9 +31,9 @@ const mutations = {
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { username, password, code, uuid } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
+      login({ username: username.trim(), password: password, uuid: uuid, code: code.trim() }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data)
         setToken(data)
@@ -47,6 +47,7 @@ const actions = {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
+      console.log('store.modules.user.getInfoAPI')
       getInfoAPI().then(response => {
         const { data } = response
 

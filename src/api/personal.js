@@ -1,4 +1,11 @@
 import request from '@/utils/request'
+// 获取验证码
+export function captchaGetAPI() {
+  return request({
+    url: '/captcha',
+    method: 'get'
+  })
+}
 /**
  * 用户登录
  * @param {*} data

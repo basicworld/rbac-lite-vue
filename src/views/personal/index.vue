@@ -180,6 +180,7 @@ export default {
   methods: {
     /** 获取用户信息 */
     doGetUserInfo() {
+      console.log('personal.index.getInfoAPI')
       getInfoAPI().then(res => {
         this.user = res.data
         this.infoForm = {

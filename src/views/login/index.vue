@@ -43,6 +43,33 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
+      <el-form-item prop="code">
+        <el-row :gutter="10">
+          <el-col :span="14">
+            <el-input
+              ref="code"
+              v-model="loginForm.code"
+              placeholder="图片验证码"
+              prefix-icon="el-icon-picture-outline"
+              name="code"
+              type="text"
+              tabindex="3"
+              auto-complete="off"
+              class="img-container"
+              @keyup.enter.native="handleLogin"
+            />
+          </el-col>
+          <el-col :span="9">
+            <img
+              :src="captchaUrl"
+              title="点击替换"
+              alt="验证码"
+              style="cursor: pointer; width: 120px; height: 40px;"
+              @click="reloadCaptcha"
+            >
+          </el-col>
+        </el-row>
+      </el-form-item>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
 
@@ -60,6 +87,7 @@
 import { validUsername } from '@/utils/validate'
 import { encrypt } from '@/utils/jsencrypt'
 import { removeToken } from '@/utils/auth'
+import { captchaGetAPI } from '@/api/personal'
 
 export default {
   name: 'Login',
@@ -79,9 +107,13 @@ export default {
       }
     }
     return {
+      // 图片验证码地址
+      captchaUrl: undefined,
       loginForm: {
         username: 'admin',
-        password: 'Abcd1234'
+        password: 'Abcd1234',
+        code: undefined,
+        uuid: undefined // 验证码唯一ID
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -102,9 +134,15 @@ export default {
   },
   created() {
     removeToken()
+    this.reloadCaptcha()
   },
   methods: {
-
+    reloadCaptcha() {
+      captchaGetAPI().then(res => {
+        this.captchaUrl = 'data:image/gif;base64,' + res.data.base64
+        this.loginForm.uuid = res.data.uuid
+      })
+    },
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -121,6 +159,8 @@ export default {
           this.loading = true
           var param = {
             username: this.loginForm.username,
+            code: this.loginForm.code,
+            uuid: this.loginForm.uuid,
             password: encrypt(this.loginForm.password)
           }
           this.$store.dispatch('user/login', param).then(() => {
@@ -128,6 +168,7 @@ export default {
             this.loading = false
           }).catch(() => {
             this.loading = false
+            this.reloadCaptcha()
           })
         } else {
           console.log('error submit!!')
