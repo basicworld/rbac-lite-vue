@@ -1,4 +1,4 @@
-import { login, logout, getInfoAPI } from '@/api/personal'
+import { login, logoutAPI, getInfoAPI } from '@/api/personal'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -69,7 +69,7 @@ const actions = {
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
+      logoutAPI(state.token).then(() => {
         removeToken() // must remove  token  first
         resetRouter()
         commit('RESET_STATE')
@@ -84,6 +84,7 @@ const actions = {
   fedLogOut({ commit }) {
     return new Promise(resolve => {
       removeToken()
+      resetRouter()
       commit('SET_TOKEN', '')
       resolve()
     })

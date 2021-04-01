@@ -88,6 +88,7 @@ import { validUsername } from '@/utils/validate'
 import { encrypt } from '@/utils/jsencrypt'
 import { removeToken } from '@/utils/auth'
 import { captchaGetAPI } from '@/api/personal'
+import { areYouOk } from '@/api/router'
 
 export default {
   name: 'Login',
@@ -110,9 +111,9 @@ export default {
       // 图片验证码地址
       captchaUrl: undefined,
       loginForm: {
-        username: 'admin',
-        password: 'Abcd1234',
-        code: undefined,
+        username: '', // 用户名
+        password: '', // 密码
+        code: undefined, // 验证码
         uuid: undefined // 验证码唯一ID
       },
       loginRules: {
@@ -133,8 +134,12 @@ export default {
     }
   },
   created() {
-    removeToken()
-    this.reloadCaptcha()
+    areYouOk().then(() => {
+      removeToken()
+      this.reloadCaptcha()
+    }).catch(e => {
+      this.$message.error('服务器错误')
+    })
   },
   methods: {
     reloadCaptcha() {

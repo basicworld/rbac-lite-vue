@@ -69,8 +69,16 @@ service.interceptors.response.use(
       } else
       //  50016: Auth fail;
       if (res.code === 50016) {
-        store.dispatch('user/resetToken').then(() => {
-          location.reload()
+        // to re-login
+        MessageBox.confirm('登录失败，可能是用户名密码错误或账号锁定，请尝试重新登录或联系管理员', '登录失败', {
+          confirmButtonText: '好的',
+          cancelButtonText: '取消',
+          type: 'warning',
+          cancelButtonClass: 'btn-custom-cancel'
+        }).then(() => {
+          store.dispatch('user/resetToken').then(() => {
+            location.reload()
+          })
         })
       }
       return Promise.reject(new Error(res.msg || 'Error'))
