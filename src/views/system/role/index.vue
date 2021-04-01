@@ -34,7 +34,7 @@
       <el-table-column prop="roleName" label="角色名称" />
       <el-table-column prop="roleKey" label="角色代码" />
       <el-table-column prop="sort" label="排序" />
-      <el-table-column prop="note" label="备注" min-width="140" />
+      <el-table-column prop="note" label="描述" min-width="140" />
       <el-table-column fixed="right" label="操作" align="center" width="180">
         <template slot-scope="scope">
           <el-button size="small" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)">修改</el-button>
