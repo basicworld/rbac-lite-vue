@@ -47,8 +47,8 @@ module.exports = [
   },
   // update info
   {
-    url: '/personal/info',
-    type: 'put',
+    url: '/personal/info/update',
+    type: 'post',
     response: config => {
       return {
         code: 20000,
@@ -58,8 +58,8 @@ module.exports = [
   },
   // update password
   {
-    url: '/personal/password',
-    type: 'put',
+    url: '/personal/password/update',
+    type: 'post',
     response: config => {
       return {
         code: 20000,
@@ -69,7 +69,7 @@ module.exports = [
   },
   // get user info
   {
-    url: '/personal/info',
+    url: '/personal/info/detail',
     type: 'get',
     response: config => {
       // mock header只能识别小写

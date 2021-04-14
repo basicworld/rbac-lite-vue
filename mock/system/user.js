@@ -1,7 +1,7 @@
 module.exports = [
   // add
   {
-    url: '/system/user',
+    url: '/system/user/create',
     type: 'post',
     response: config => {
       return {
@@ -12,8 +12,8 @@ module.exports = [
   },
   // update
   {
-    url: '/system/user',
-    type: 'put',
+    url: '/system/user/update',
+    type: 'post',
     response: config => {
       return {
         code: 20000,
@@ -23,8 +23,8 @@ module.exports = [
   },
   // reset password
   {
-    url: '/system/user/resetPassword',
-    type: 'put',
+    url: '/system/user/password/reset',
+    type: 'post',
     response: config => {
       return {
         code: 20000,
@@ -34,8 +34,8 @@ module.exports = [
   },
   // delete
   {
-    url: '/system/user/\\d',
-    type: 'delete',
+    url: '/system/user/delete/\\d',
+    type: 'post',
     response: config => {
       return {
         code: 20000,
@@ -45,7 +45,7 @@ module.exports = [
   },
   // get
   {
-    url: '/system/user/\\d',
+    url: '/system/user/detail/\\d',
     type: 'get',
     response: config => {
       return {

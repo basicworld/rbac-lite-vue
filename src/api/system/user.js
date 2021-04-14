@@ -17,7 +17,7 @@ export function userListAPI(params) {
  */
 export function userGetAPI(userId) {
   return request({
-    url: '/system/user/' + userId,
+    url: '/system/user/detail/' + userId,
     method: 'get'
   })
 }
@@ -27,8 +27,8 @@ export function userGetAPI(userId) {
  */
 export function userDeleteAPI(userId) {
   return request({
-    url: '/system/user/' + userId,
-    method: 'delete'
+    url: '/system/user/delete/' + userId,
+    method: 'post'
   })
 }
 /**
@@ -37,7 +37,7 @@ export function userDeleteAPI(userId) {
  */
 export function userCreateAPI(data) {
   return request({
-    url: '/system/user',
+    url: '/system/user/create',
     method: 'post',
     data
   })
@@ -48,8 +48,8 @@ export function userCreateAPI(data) {
  */
 export function userUpdateAPI(data) {
   return request({
-    url: '/system/user',
-    method: 'put',
+    url: '/system/user/update',
+    method: 'post',
     data
   })
 }
@@ -59,8 +59,8 @@ export function userUpdateAPI(data) {
  */
 export function userResetPasswordAPI(data) {
   return request({
-    url: '/system/user/resetPassword',
-    method: 'put',
+    url: '/system/user/password/reset',
+    method: 'post',
     data
   })
 }

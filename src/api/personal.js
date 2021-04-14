@@ -20,7 +20,7 @@ export function login(data) {
 
 export function getInfoAPI(token) {
   return request({
-    url: '/personal/info',
+    url: '/personal/info/detail',
     method: 'get',
     params: { token }
   })
@@ -39,8 +39,8 @@ export function logoutAPI() {
  */
 export function userPasswordUpdateAPI(data) {
   return request({
-    url: '/personal/password',
-    method: 'put',
+    url: '/personal/password/update',
+    method: 'post',
     data
   })
 }
@@ -51,8 +51,8 @@ export function userPasswordUpdateAPI(data) {
  */
 export function userInfoUpdateAPI(data) {
   return request({
-    url: '/personal/info',
-    method: 'put',
+    url: '/personal/info/update',
+    method: 'post',
     data
   })
 }

@@ -16,7 +16,7 @@ export function roleListAPI(params) {
  */
 export function roleGetAPI(roleId) {
   return request({
-    url: '/system/role/' + roleId,
+    url: '/system/role/detail/' + roleId,
     method: 'get'
   })
 }
@@ -26,8 +26,8 @@ export function roleGetAPI(roleId) {
  */
 export function roleDeleteAPI(roleId) {
   return request({
-    url: '/system/role/' + roleId,
-    method: 'delete'
+    url: '/system/role/delete/' + roleId,
+    method: 'post'
   })
 }
 /**
@@ -36,7 +36,7 @@ export function roleDeleteAPI(roleId) {
  */
 export function roleCreateAPI(data) {
   return request({
-    url: '/system/role',
+    url: '/system/role/create',
     method: 'post',
     data
   })
@@ -47,8 +47,8 @@ export function roleCreateAPI(data) {
  */
 export function roleUpdateAPI(data) {
   return request({
-    url: '/system/role',
-    method: 'put',
+    url: '/system/role/update',
+    method: 'post',
     data
   })
 }

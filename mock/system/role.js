@@ -166,7 +166,7 @@ module.exports = [
   },
   // get
   {
-    url: '/system/role/\\d',
+    url: '/system/role/detail/\\d',
     type: 'get',
     response: config => {
       return {
@@ -192,7 +192,7 @@ module.exports = [
   },
   // add
   {
-    url: '/system/role',
+    url: '/system/role/create',
     type: 'post',
     response: config => {
       return {
@@ -203,8 +203,8 @@ module.exports = [
   },
   // update
   {
-    url: '/system/role',
-    type: 'put',
+    url: '/system/role/update',
+    type: 'post',
     response: config => {
       return {
         code: 20000,
@@ -214,8 +214,8 @@ module.exports = [
   },
   // delete
   {
-    url: '/system/role',
-    type: 'delete',
+    url: '/system/role/delete',
+    type: 'post',
     response: config => {
       return {
         code: 20000,
