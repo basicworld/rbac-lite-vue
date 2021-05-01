@@ -5,6 +5,15 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
+      <template v-if="device!=='mobile'">
+        <div class="right-menu-item">
+          <router-link to="/message/index">消息
+            <el-badge class="mark" size="middle" type="success" :value="0" />
+          </router-link>
+        </div>
+        <div class="right-menu-item" style="margin-right: 20px;" />
+      </template>
+
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="require('@/assets/images/blue-people.png')" class="user-avatar">
@@ -88,7 +97,7 @@ export default {
       display: inline-block;
       padding: 0 8px;
       height: 100%;
-      font-size: 18px;
+      font-size: 14px;
       color: #5a5e66;
       vertical-align: text-bottom;
 

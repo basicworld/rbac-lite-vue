@@ -55,6 +55,19 @@ export const constantRoutes = [
     }]
   },
   {
+    path: '/message',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        name: '消息中心',
+        component: () => import('@/views/message/index'),
+        meta: { title: '消息中心', icon: 'form' }
+      }
+    ]
+  },
+  {
     path: '/personal',
     component: Layout,
     hidden: true,
