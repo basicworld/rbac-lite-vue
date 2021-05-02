@@ -5,7 +5,7 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-      <template v-if="device!=='mobile'">
+      <template>
         <div class="right-menu-item">
           <router-link to="/message/index">消息
             <el-badge class="mark" size="middle" type="success" :value="0" />
