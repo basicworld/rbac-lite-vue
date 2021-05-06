@@ -5,14 +5,13 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-      <template>
-        <div class="right-menu-item">
-          <router-link to="/message/index">消息
-            <el-badge class="mark" size="middle" type="success" :value="0" />
-          </router-link>
-        </div>
-        <div class="right-menu-item" style="margin-right: 20px;" />
-      </template>
+      <!-- <div class="right-menu-item">
+        <router-link to="/message/index">消息
+          <el-badge class="mark" size="middle" type="success" :value="unreadCount" />
+          <el-badge v-if="unreadCount>=1" class="mark" size="middle" type="error" :value="unreadCount" />
+        </router-link>
+      </div> -->
+      <message-count />
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
@@ -36,18 +35,32 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import MessageCount from '@/components/MessageCount'
+// import { messageUnreadCountAPI } from '@/api/message'
 
 export default {
   components: {
     Breadcrumb,
-    Hamburger
+    Hamburger,
+    MessageCount
   },
+
   computed: {
     ...mapGetters([
       'sidebar'
     ])
   },
+  mounted() {
+    this.getMessageCountFunc()
+  },
   methods: {
+    /** 获取未读消息数量 */
+    getMessageCountFunc() {
+      this.$store.dispatch('message/changeUnreadCount')
+      // messageUnreadCountAPI().then(resp => {
+      // this.$store.commit('message/CHANGE_UNREAD_COUNT', resp.data)
+      // })
+    },
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },

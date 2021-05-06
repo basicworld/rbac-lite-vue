@@ -3,26 +3,29 @@
     <el-row>
       <el-col :span="2"><div class="grid-content" /></el-col>
       <el-col :span="18">
-        <div>
-          <el-button type="text">本页已读</el-button>
-          <el-button type="text">全部已读</el-button>
+        <!-- 操作按钮 -->
+        <div style="margin-bottom: 20px;">
+          <el-button type="text" @click="markShowingMessageAsRead">本页已读</el-button>
+          <el-button type="text" @click="markAllMessageAsRead">全部已读</el-button>
           <div style="float: right;">
-            <el-button type="text" icon="el-icon-refresh">刷新</el-button>
-            <el-checkbox v-model="unreadTop" style="margin-left: 20px;">未读置顶</el-checkbox>
-
+            <el-button type="text" icon="el-icon-refresh" @click="refreshNow">刷新</el-button>
+            <el-checkbox v-model="queryParams.unreadTop" style="margin-left: 20px;">未读置顶</el-checkbox>
           </div>
-
-        </div>
-        <div style="margin-top: 20px;">
-          <message-item :item-data-prop="itemDataExample" />
         </div>
 
-        <div>
+        <!-- 展示区 -->
+
+        <div v-for="item in tableData" :key="item.id" style="margin-top: 0px;">
+          <message-item :item-data-prop="item" />
+        </div>
+
+        <div style="text-align: center;">
           <pagination
             v-show="total >= 0"
             :total="total"
             :page.sync="queryParams.pageNum"
             :limit.sync="queryParams.pageSize"
+            layout="prev, pager, next"
             @pagination="getList"
           />
         </div>
@@ -35,16 +38,14 @@
 
 <script>
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-
 import MessageItem from './MessageItem'
 import { areYouOk } from '@/api/router'
+import { messageListAPI, messageMarkReadAPI } from '@/api/message'
 
 export default {
   components: { MessageItem, Pagination },
   data() {
     return {
-      // 未读置顶标记
-      unreadTop: true,
       itemDataExample: {
         id: 1,
         sender: '系统',
@@ -65,8 +66,22 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        unreadTop: undefined
+        unreadTop: true // 未读置顶
       }
+    }
+  },
+  computed: {
+    queryParamsGetter() {
+      return this.queryParams.unreadTop
+    }
+  },
+  watch: {
+    queryParamsGetter: {
+      handler(data) {
+        this.refreshNow()
+      },
+      immediate: true,
+      deep: true
     }
   },
   created() {
@@ -76,8 +91,34 @@ export default {
     })
   },
   methods: {
+    /** 获取消息列表 */
     getList() {
-
+      messageListAPI(this.queryParams).then(resp => {
+        this.tableData = Object.assign([], resp.rows)
+        this.total = resp.total
+      })
+    },
+    /** 刷新消息列表 */
+    refreshNow() {
+      this.getList()
+      this.$store.dispatch('message/changeUnreadCount')
+    },
+    /** 当前页面消息标记为已读 */
+    markShowingMessageAsRead() {
+      const ids = []
+      for (let i = 0; i < this.tableData.length; i++) {
+        ids.push(this.tableData[i].id)
+      }
+      messageMarkReadAPI(ids).then(resp => {
+        this.refreshNow()
+      })
+    },
+    /** 用户所有消息标记为已读 */
+    markAllMessageAsRead() {
+      // -1 表示所有消息标记为已读
+      messageMarkReadAPI([-1]).then(resp => {
+        this.refreshNow()
+      })
     }
   }
 }

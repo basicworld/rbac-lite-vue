@@ -2,15 +2,15 @@
   <div style="margin-bottom: 10px;">
     <el-row>
       <el-col :span="2" style="text-align: center;">
-        <i v-if="itemData.hasRead==='true'" class="el-icon-message-solid green-alarm" />
-        <i v-if="itemData.hasRead==='false'" class="el-icon-message-solid red-alarm" />
+        <i v-if="itemData.hasRead===1" class="el-icon-message-solid green-alarm" />
+        <i v-if="itemData.hasRead===0" class="el-icon-message-solid red-alarm" />
         <i v-if="itemData.hasRead===undefined" class="el-icon-message-solid gray-alarm" />
       </el-col>
       <el-col :span="22">
         <div class="item-meta">
           <span>来自 {{ itemData.sender }} 的消息 · {{ itemData.createTime }}</span>
           <div style="float: right;">
-            <el-button v-if="itemData.hasRead==='false'" type="text" @click="markItemAsRead">标为已读</el-button>
+            <el-button v-if="itemData.hasRead===0" type="text" @click="markItemAsRead">标为已读</el-button>
           </div>
         </div>
         <div class="item-title">
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { messageMarkReadAPI } from '@/api/message'
+
 export default {
   name: 'MessageItem',
   props: {
@@ -54,14 +56,28 @@ export default {
       }
     }
   },
-  mounted() {
-    this.itemData = this.itemDataProp
+  computed: {
+    itemDataPropGetter() {
+      return this.itemDataProp
+    }
   },
-
+  watch: {
+    itemDataPropGetter: {
+      handler(data) {
+        this.itemData = data
+      },
+      immediate: true,
+      deep: true
+    }
+  },
   methods: {
     /** 将本项目标记为已读 */
     markItemAsRead() {
-      this.itemData.hasRead = 'true'
+      messageMarkReadAPI([this.itemData.id]).then(resp => {
+        this.itemData.hasRead = 1
+      })
+
+      this.$store.dispatch('message/changeUnreadCount')
     }
   }
 }
@@ -79,6 +95,10 @@ export default {
   .gray-alarm {
     font-size: xx-large;
     color: #909399;
+  }
+  .warn-alarm {
+    font-size: xx-large;
+    color: #E6A23C;
   }
   .item-meta{
     color: #909399;
