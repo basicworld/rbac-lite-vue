@@ -1,7 +1,7 @@
 import { messageUnreadCountAPI } from '@/api/message'
 
 const state = {
-  unread_count: 1
+  unread_count: 0
 }
 
 const mutations = {

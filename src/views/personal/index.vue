@@ -212,6 +212,7 @@ export default {
             this.doGetUserInfo()
             // 更新缓存的用户信息
             store.dispatch('user/getInfo')
+            this.$store.dispatch('message/changeUnreadCount')
           })
         }
       })
@@ -232,6 +233,7 @@ export default {
           userPasswordUpdateAPI(parm).then(res => {
             this.$message.success('修改密码成功')
             this.onPwdCancel()
+            this.$store.dispatch('message/changeUnreadCount')
           })
         }
       })

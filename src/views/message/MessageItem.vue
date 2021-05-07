@@ -75,9 +75,8 @@ export default {
     markItemAsRead() {
       messageMarkReadAPI([this.itemData.id]).then(resp => {
         this.itemData.hasRead = 1
+        this.$store.dispatch('message/changeUnreadCount')
       })
-
-      this.$store.dispatch('message/changeUnreadCount')
     }
   }
 }

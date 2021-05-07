@@ -348,6 +348,7 @@ export default {
       }).then(resp => {
         this.getList()
         this.$message.success(resp.msg)
+        this.$store.dispatch('message/changeUnreadCount')
       }).catch(() => {})
     },
     /** 触发重置密码弹窗 */
@@ -396,6 +397,7 @@ export default {
               this.$message.success(resp.msg)
               this.open = false
               this.getList()
+              this.$store.dispatch('message/changeUnreadCount')
             })
           } else {
             // 新增
@@ -416,6 +418,7 @@ export default {
               this.$message.success(resp.msg)
               this.open = false
               this.getList()
+              this.$store.dispatch('message/changeUnreadCount')
             })
           }
         }
@@ -455,6 +458,7 @@ export default {
           userResetPasswordAPI(param).then(resp => {
             this.$message.success(resp.msg)
             this.pwdOpen = false
+            this.$store.dispatch('message/changeUnreadCount')
           })
         }
       })
