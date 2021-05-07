@@ -162,7 +162,7 @@ export default {
     // 执行初始化动作
     areYouOk().then(() => {
       this.getList()
-    })
+    }).catch(e => { })
   },
   methods: {
     // ////// 常用函数 //////

@@ -88,7 +88,7 @@ export default {
     // 执行初始化动作
     areYouOk().then(() => {
       this.getList()
-    })
+    }).catch(e => { })
   },
   methods: {
     /** 获取消息列表 */

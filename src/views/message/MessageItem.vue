@@ -1,16 +1,20 @@
 <template>
   <div style="margin-bottom: 10px;">
     <el-row>
-      <el-col :span="2" style="text-align: center;">
-        <i v-if="itemData.hasRead===1" class="el-icon-message-solid green-alarm" />
+      <el-col :xs="0" :span="2" style="text-align: center;">
+        <transition name="el-zoom-in-center">
+          <i v-if="itemData.hasRead===1" class="el-icon-message-solid green-alarm" />
+        </transition>
         <i v-if="itemData.hasRead===0" class="el-icon-message-solid red-alarm" />
         <i v-if="itemData.hasRead===undefined" class="el-icon-message-solid gray-alarm" />
       </el-col>
-      <el-col :span="22">
+      <el-col :xs="22" :span="22">
         <div class="item-meta">
           <span>来自 {{ itemData.sender }} 的消息 · {{ itemData.createTime }}</span>
           <div style="float: right;">
-            <el-button v-if="itemData.hasRead===0" type="text" @click="markItemAsRead">标为已读</el-button>
+            <transition name="el-fade-in">
+              <el-button v-if="itemData.hasRead===0" type="text" @click="markItemAsRead">标为已读</el-button>
+            </transition>
           </div>
         </div>
         <div class="item-title">
@@ -84,14 +88,17 @@ export default {
 
 <style>
   .green-alarm {
+    margin-top: 10px;
     font-size: xx-large;
     color: #67C23A;
   }
   .red-alarm {
+    margin-top: 10px;
     font-size: xx-large;
     color: #F56C6C;
   }
   .gray-alarm {
+    margin-top: 10px;
     font-size: xx-large;
     color: #909399;
   }
@@ -106,8 +113,10 @@ export default {
   .item-title {
     font-weight: bold;
     margin-top: 5px;
+    color: #303133;
   }
   .item-content {
     margin-top: 5px;
+    color: #606266;
   }
 </style>

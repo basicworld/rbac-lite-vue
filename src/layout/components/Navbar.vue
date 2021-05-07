@@ -5,12 +5,6 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-      <!-- <div class="right-menu-item">
-        <router-link to="/message/index">消息
-          <el-badge class="mark" size="middle" type="success" :value="unreadCount" />
-          <el-badge v-if="unreadCount>=1" class="mark" size="middle" type="error" :value="unreadCount" />
-        </router-link>
-      </div> -->
       <message-count />
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
@@ -19,11 +13,17 @@
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
-          <router-link to="/personal/index">
-            <el-dropdown-item>个人中心</el-dropdown-item>
-          </router-link>
-          <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">退出登录</span>
+          <el-dropdown-item>
+            <router-link to="/personal/index">
+              <span style="display:block;">
+                <i class="el-icon-setting" />个人设置
+              </span>
+            </router-link>
+          </el-dropdown-item>
+          <el-dropdown-item @click.native="logout">
+            <span style="display:block;">
+              <i class="el-icon-switch-button" />退出
+            </span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -57,9 +57,6 @@ export default {
     /** 获取未读消息数量 */
     getMessageCountFunc() {
       this.$store.dispatch('message/changeUnreadCount')
-      // messageUnreadCountAPI().then(resp => {
-      // this.$store.commit('message/CHANGE_UNREAD_COUNT', resp.data)
-      // })
     },
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')

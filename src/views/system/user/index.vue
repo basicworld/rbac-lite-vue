@@ -274,7 +274,7 @@ export default {
     areYouOk().then(() => {
       this.getList()
       this.getRoleOptions()
-    })
+    }).catch(e => { })
   },
   methods: {
     // ////// 常用函数 //////

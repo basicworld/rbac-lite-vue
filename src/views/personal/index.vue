@@ -8,11 +8,11 @@
             <span style="font-weight: bold;">基本信息</span>
           </div>
           <el-row>
-            <el-col :span="24" class="mb10"><i class="el-icon-user-solid" /> 用户名：{{ user.username }}</el-col>
-            <el-col :span="24" class="mb10"><i class="el-icon-user-solid" /> 昵称：{{ user.nickname }}</el-col>
-            <el-col :span="24" class="mb10"><i class="el-icon-phone" /> 手机：{{ user.phone }}</el-col>
-            <el-col :span="24" class="mb10"><i class="el-icon-s-comment" /> 邮箱：{{ user.email }}</el-col>
-            <el-col :span="24" class="mb10"><i class="el-icon-s-cooperation" /> 部门：{{ user.deptname }}</el-col>
+            <el-col :span="24" class="mb10"><i class="el-icon-user" /> 用户名：{{ user.username }}</el-col>
+            <el-col :span="24" class="mb10"><i class="el-icon-user" /> 昵称：{{ user.nickname }}</el-col>
+            <el-col :span="24" class="mb10"><i class="el-icon-phone-outline" /> 手机：{{ user.phone }}</el-col>
+            <el-col :span="24" class="mb10"><i class="el-icon-message" /> 邮箱：{{ user.email }}</el-col>
+            <el-col :span="24" class="mb10"><i class="el-icon-office-building" /> 部门：{{ user.deptname }}</el-col>
           </el-row>
 
         </el-card>
@@ -175,12 +175,11 @@ export default {
   created() {
     areYouOk().then(() => {
       this.doGetUserInfo()
-    })
+    }).catch(e => { })
   },
   methods: {
     /** 获取用户信息 */
     doGetUserInfo() {
-      console.log('personal.index.getInfoAPI')
       getInfoAPI().then(res => {
         this.user = res.data
         this.infoForm = {

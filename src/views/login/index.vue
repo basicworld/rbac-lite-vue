@@ -137,9 +137,7 @@ export default {
     areYouOk().then(() => {
       removeToken()
       this.reloadCaptcha()
-    }).catch(e => {
-      this.$message.error('服务器错误')
-    })
+    }).catch(e => { })
   },
   methods: {
     reloadCaptcha() {

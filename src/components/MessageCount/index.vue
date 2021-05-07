@@ -6,7 +6,7 @@
         <i class="el-icon-message-solid large-bell" />
       </el-tooltip>
       <transition name="el-fade-in-linear">
-        <el-badge v-if="unreadCount>=1" :max="99" class="mark" size="middle" type="danger" :value="unreadCount" />
+        <el-badge v-if="unreadCount>=1" :max="99" class="mark" type="danger" :value="unreadCount" />
       </transition>
     </router-link>
   </div>
@@ -40,8 +40,12 @@ export default {
 </script>
 
 <style>
+  .item{
+    padding-top: 12px;
+  }
   .large-bell{
-    font-size: 20px;
+    font-size: 26px;
+    color: #909399;
   }
   .el-divider--horizontal{
     margin: 10px 0;
@@ -50,9 +54,15 @@ export default {
     display: inline-block;
     padding: 0 8px;
     height: 100%;
-    font-size: 14px;
+    font-size: 10px;
     color: #5a5e66;
     vertical-align: text-bottom;
     width: 80px;
+  }
+  .el-badge {
+    position: relative;
+    vertical-align: top;
+    margin-left: -10px;
+    display: inline-block;
   }
 </style>
