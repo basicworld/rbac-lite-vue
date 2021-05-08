@@ -2,18 +2,17 @@
   <div style="margin-bottom: 10px;">
     <el-row>
       <el-col :xs="0" :span="2" style="text-align: center;">
-        <transition name="el-zoom-in-center">
-          <i v-if="itemData.hasRead===1" class="el-icon-message-solid green-alarm" />
-        </transition>
-        <i v-if="itemData.hasRead===0" class="el-icon-message-solid red-alarm" />
-        <i v-if="itemData.hasRead===undefined" class="el-icon-message-solid gray-alarm" />
+        <i
+          class="el-icon-message-solid"
+          :class="{'green-alarm': itemData.hasRead===1, 'red-alarm':itemData.hasRead===0}"
+        />
       </el-col>
       <el-col :xs="22" :span="22">
         <div class="item-meta">
           <span>来自 {{ itemData.sender }} 的消息 · {{ itemData.createTime }}</span>
           <div style="float: right;">
             <transition name="el-fade-in">
-              <el-button v-if="itemData.hasRead===0" type="text" @click="markItemAsRead">标为已读</el-button>
+              <el-button v-show="itemData.hasRead===0" type="text" @click="markItemAsRead">标为已读</el-button>
             </transition>
           </div>
         </div>
