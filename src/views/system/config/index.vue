@@ -4,7 +4,7 @@
     <el-row>
       <el-col :span="2"><div class="grid-content" /></el-col>
       <el-col :span="18">
-        <el-form ref="configForm" :rules="rules" :model="form" label-position="left" size="small" label-width="120px">
+        <el-form ref="configForm" :rules="rules" :model="form" label-position="left" size="small" label-width="200px">
           <div v-for="(item,index) in constTableData" :key="index" style="margin-top: 0px;">
             <el-form-item :label="item.configName" style="margin-bottom: 10px;">
               <el-input v-if="item.formType==='password'" v-model="form[item.configKey]" show-password />
@@ -30,8 +30,11 @@
               <span style="font-size: small; color: #909399;">【保存】后默认在下次服务器重启时生效。【刷新缓存】可以使保存参数立即生效。</span>
             </div>
             <el-button type="primary" :disabled="!anyChangeHappen()" icon="el-icon-check" @click="submitForm()">保存</el-button>
-            <el-button icon="el-icon-close" :disabled="!anyChangeHappen()" @click="resetForm()">取消修改</el-button>
+            <el-button icon="el-icon-close" @click="resetForm()">取消修改</el-button>
             <el-button type="danger" icon="el-icon-refresh" plain @click="flushCache()">刷新缓存</el-button>
+          </el-form-item>
+          <el-form-item>
+            <mail-test />
           </el-form-item>
         </el-form>
       </el-col>
@@ -43,8 +46,12 @@
 <script>
 import { configListAPI, configUpdateAPI, configFlushCacheAPI } from '@/api/system/config'
 import { diffObjectFunc } from '@/utils/object-util'
+import MailTest from './MailTest'
 
 export default {
+  components: {
+    MailTest
+  },
   data() {
     return {
       // 遮罩层

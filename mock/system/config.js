@@ -57,6 +57,16 @@ module.exports = [
         msg: 'success'
       }
     }
+  },
+  // 测试发送邮件
+  {
+    url: '/system/config/test/mailSend',
+    type: 'post',
+    response: config => {
+      return {
+        code: 20000,
+        msg: 'success'
+      }
+    }
   }
-
 ]

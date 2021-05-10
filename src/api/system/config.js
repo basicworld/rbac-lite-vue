@@ -34,3 +34,17 @@ export function configFlushCacheAPI(data) {
     data
   })
 }
+
+/**
+ * 邮件参数测试接口
+ *
+ * @param { mailTo } data 收件人地址
+ * @returns
+ */
+export function configMailSendTestAPI(data) {
+  return request({
+    url: '/system/config/test/mailSend',
+    method: 'post',
+    data
+  })
+}

@@ -70,7 +70,7 @@ service.interceptors.response.use(
       //  50016: Auth fail;
       if (res.code === 50016) {
         // to re-login
-        MessageBox.confirm('登录失败，可能是用户名密码错误或账号锁定，请尝试重新登录或联系管理员', '登录失败', {
+        MessageBox.confirm('超时退出或登录失败，请尝试重新登录或联系管理员', '认证失败', {
           confirmButtonText: '好的',
           cancelButtonText: '取消',
           type: 'warning',
