@@ -56,6 +56,19 @@ module.exports = [
                   'icon': null
                 },
                 'children': null
+              },
+              {
+                'name': '参数管理',
+                'path': 'config',
+                'hidden': false,
+                'redirect': null,
+                'component': 'system/config/index',
+                'alwaysShow': null,
+                'meta': {
+                  'title': '参数管理',
+                  'icon': null
+                },
+                'children': null
               }
 
             ]

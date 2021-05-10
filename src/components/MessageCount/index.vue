@@ -47,9 +47,6 @@ export default {
     font-size: 26px;
     color: #909399;
   }
-  .el-divider--horizontal{
-    margin: 10px 0;
-  }
   .right-menu-bell{
     display: inline-block;
     padding: 0 8px;

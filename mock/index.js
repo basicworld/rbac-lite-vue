@@ -7,6 +7,7 @@ const router = require('./router')
 const sysuser = require('./system/user')
 const sysrole = require('./system/role')
 const sysmenu = require('./system/menu')
+const sysconfig = require('./system/config')
 
 const mocks = [
   ...personal,
@@ -14,6 +15,7 @@ const mocks = [
   ...sysuser,
   ...sysrole,
   ...sysmenu,
+  ...sysconfig,
   ...router
 ]
 
