@@ -88,21 +88,21 @@ export default {
 <style>
   .green-alarm {
     margin-top: 10px;
-    font-size: xx-large;
+    font-size: 30px;
     color: #67C23A;
   }
   .red-alarm {
     margin-top: 10px;
-    font-size: xx-large;
+    font-size: 30px;
     color: #F56C6C;
   }
   .gray-alarm {
     margin-top: 10px;
-    font-size: xx-large;
+    font-size: 30px;
     color: #909399;
   }
   .warn-alarm {
-    font-size: xx-large;
+    font-size: 30px;
     color: #E6A23C;
   }
   .item-meta{
