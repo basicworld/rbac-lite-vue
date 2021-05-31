@@ -41,10 +41,10 @@ export default {
 
 <style>
   .item{
-    padding-top: 12px;
+    padding-top: 14px;
   }
   .large-bell{
-    font-size: 26px;
+    font-size: 22px;
     color: #909399;
   }
   .right-menu-bell{
