@@ -63,7 +63,10 @@ export default {
     },
     async logout() {
       await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      // 登陆跳转，重新登陆后跳转到首页
+      this.$router.push(`/login`)
+      // 下面的功能是，重新登陆后跳转到退出前的页面，如果跳转到用户没有权限的页面会报错
+      // this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
 }
