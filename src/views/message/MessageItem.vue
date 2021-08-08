@@ -7,12 +7,12 @@
           :class="{'green-alarm': itemData.hasRead===1, 'red-alarm':itemData.hasRead===0}"
         />
       </el-col>
-      <el-col :xs="22" :span="22">
+      <el-col :xs="24" :span="22">
         <div class="item-meta">
           <span>来自 {{ itemData.sender }} 的消息 · {{ itemData.createTime }}</span>
           <div style="float: right;">
             <transition name="el-fade-in">
-              <el-button v-show="itemData.hasRead===0" type="text" @click="markItemAsRead">标为已读</el-button>
+              <el-button v-show="itemData.hasRead===0" :type="device!=='mobile'?'text':'primary'" plain @click="markItemAsRead">标为已读</el-button>
             </transition>
           </div>
         </div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { messageMarkReadAPI } from '@/api/message'
 
 export default {
@@ -60,6 +61,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'device'
+    ]),
     itemDataPropGetter() {
       return this.itemDataProp
     }

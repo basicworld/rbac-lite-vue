@@ -33,7 +33,7 @@
       <el-table-column prop="id" label="编号" width="100" />
       <el-table-column prop="userName" label="用户名" />
       <el-table-column prop="nickName" label="昵称" />
-      <el-table-column prop="deptName" label="部门" />
+      <!-- <el-table-column prop="deptName" label="部门" /> -->
       <el-table-column prop="email" label="邮箱" min-width="140" />
       <el-table-column prop="status" label="启用">
         <template slot-scope="scope">

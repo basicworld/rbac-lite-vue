@@ -2,18 +2,22 @@
   <div class="app-container">
     <!-- 展示区 -->
     <el-row>
-      <el-col :span="2"><div class="grid-content" /></el-col>
-      <el-col :span="18">
-        <el-form ref="configForm" :rules="rules" :model="form" label-position="left" size="small" label-width="200px">
+      <el-col :span="2" :xs="0"><div class="grid-content" /></el-col>
+      <el-col :span="18" :xs="24">
+        <el-form ref="configForm" :rules="rules" :model="form" :label-position="device!=='mobile'?'left':'top'" size="small" label-width="180px">
           <div v-for="(item,index) in constTableData" :key="index" style="margin-top: 0px;">
             <el-form-item :label="item.configName" style="margin-bottom: 10px;">
+              <!-- 密码框 -->
               <el-input v-if="item.formType==='password'" v-model="form[item.configKey]" show-password />
+              <!-- 文本框 -->
               <el-input v-if="item.formType==='string'" v-model="form[item.configKey]" />
+              <!-- 单选 -->
               <el-radio-group v-if="item.formType==='radio'" v-model="form[item.configKey]">
                 <el-radio v-for="(radioItem, radioIndex) in item.optionalValues.split(',')" :key="radioIndex" :label="radioItem.split(':')[0]">
                   {{ radioItem.split(':')[1] }}
                 </el-radio>
               </el-radio-group>
+              <!-- 多选 -->
               <el-checkbox-group v-if="item.formType==='checkbox'" v-model="form[item.configKey]">
                 <el-checkbox v-for="(checkboxItem, checkboxIndex) in item.optionalValues.split(',')" :key="checkboxIndex" :label="checkboxItem.split(':')[0]">
                   {{ checkboxItem.split(':')[1] }}
@@ -38,12 +42,13 @@
           </el-form-item>
         </el-form>
       </el-col>
-      <el-col :span="4"><div class="grid-content" /></el-col>
+      <el-col :span="4" :xs="0"><div class="grid-content" /></el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { configListAPI, configUpdateAPI, configFlushCacheAPI } from '@/api/system/config'
 import { diffObjectFunc } from '@/utils/object-util'
 import MailTest from './MailTest'
@@ -64,6 +69,11 @@ export default {
       constForm: {},
       rules: {}
     }
+  },
+  computed: {
+    ...mapGetters([
+      'device'
+    ])
   },
   mounted() {
     this.getList()

@@ -1,15 +1,15 @@
 <template>
   <div class="app-container">
     <el-row>
-      <el-col :span="2"><div class="grid-content" /></el-col>
-      <el-col :span="18">
+      <el-col :span="2" :xs="0"><div class="grid-content" /></el-col>
+      <el-col :span="18" :xs="24">
         <!-- 操作按钮 -->
         <div style="margin-bottom: 20px;">
-          <el-button type="text" @click="markShowingMessageAsRead">本页已读</el-button>
-          <el-button type="text" @click="markAllMessageAsRead">全部已读</el-button>
+          <el-button :type="device!=='mobile'?'text':'primary'" plain @click="markShowingMessageAsRead">本页已读</el-button>
+          <el-button :type="device!=='mobile'?'text':'primary'" plain @click="markAllMessageAsRead">全部已读</el-button>
           <div style="float: right;">
-            <el-button type="text" icon="el-icon-refresh" @click="refreshNow">刷新</el-button>
-            <el-checkbox v-model="queryParams.unreadTop" style="margin-left: 20px;">未读置顶</el-checkbox>
+            <el-button :type="device!=='mobile'?'text':'primary'" icon="el-icon-refresh" plain @click="refreshNow">刷新</el-button>
+            <el-checkbox v-model="queryParams.unreadTop" style="margin-left: 20px;" :border="device==='mobile'">未读置顶</el-checkbox>
           </div>
         </div>
 
@@ -30,13 +30,14 @@
           />
         </div>
       </el-col>
-      <el-col :span="4"><div class="grid-content" /></el-col>
+      <el-col :span="4" :xs="0"><div class="grid-content" /></el-col>
     </el-row>
 
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 import MessageItem from './MessageItem'
 import { areYouOk } from '@/api/router'
@@ -71,6 +72,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'device'
+    ]),
     queryParamsGetter() {
       return this.queryParams.unreadTop
     }
