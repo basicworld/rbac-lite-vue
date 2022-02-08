@@ -219,7 +219,7 @@ export default {
       roleGetAPI(roleId).then(resp => {
         this.form = resp.data
         this.open = true
-        this.title = '修改角色'
+        this.title = '修改角色[' + row.roleKey + ']'
         this.$nextTick(() => {
           this.$refs['form'].clearValidate()
 
@@ -232,7 +232,7 @@ export default {
     /** 触发删除弹窗，执行删除动作 */
     handleDelete(row) {
       const roleIds = row.id || this.ids
-      this.$confirm('确认删除编号为(' + roleIds + ')的角色?', '确认操作', {
+      this.$confirm('确认删除角色[' + row.roleKey + ']?', '确认操作', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
