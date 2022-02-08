@@ -329,7 +329,7 @@ export default {
       userGetAPI(userId).then(resp => {
         this.form = resp.data
         this.open = true
-        this.title = '修改用户'
+        this.title = '修改用户[' + row.userName + ']'
         this.$nextTick(() => {
           this.$refs['form'].clearValidate()
         })
@@ -338,7 +338,7 @@ export default {
     /** 触发删除弹窗，执行删除动作 */
     handleDelete(row) {
       const userIds = row.id || this.ids
-      this.$confirm('确认删除编号为(' + userIds + ')的用户?', '确认操作', {
+      this.$confirm('确认删除用户[' + row.userName + ']?', '确认操作', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
@@ -358,7 +358,7 @@ export default {
         password: undefined,
         passwordConfirm: undefined
       }
-      this.pwdTitle = '重置密码(用户编号:' + row.id + ')'
+      this.pwdTitle = '重置密码[' + row.userName + ']'
       this.pwdOpen = true
       this.$nextTick(() => {
         this.$refs['pwdForm'].clearValidate()
