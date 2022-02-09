@@ -7,7 +7,7 @@ const count = 20
 for (let i = 0; i < count; i++) {
   configList.push(Mock.mock({
     id: '@id',
-    configName: '@cname',
+    configName: '@cword(5,10)',
     configKey: '@id',
     'configValue|1': ['123', '789', 'abc'],
     'configValueType|1': ['string', 'integer', 'byte'],

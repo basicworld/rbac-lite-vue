@@ -39,7 +39,7 @@ module.exports = {
     proxy: {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
-      '/dev-api': {
+      '/dev-api-back': {
         target: `http://localhost:9000/`,
         changeOrigin: true,
         pathRewrite: {
