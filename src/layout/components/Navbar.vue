@@ -9,8 +9,9 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="require('@/assets/images/blue-people.png')" class="user-avatar">
-          <i class="el-icon-caret-bottom" />
+          <!-- <img :src="require('@/assets/images/blue-people.png')" class="user-avatar"> -->
+          <span class="user-name">{{ name }}</span>
+          <i class="el-icon-caret-bottom" style="top: 22px;" />
         </div>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
@@ -47,7 +48,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar',
+      'name'
     ])
   },
   mounted() {
@@ -63,9 +65,9 @@ export default {
     },
     async logout() {
       await this.$store.dispatch('user/logout')
-      // 登陆跳转，重新登陆后跳转到首页
+      // 登录跳转，重新登录后跳转到首页
       this.$router.push(`/login`)
-      // 下面的功能是，重新登陆后跳转到退出前的页面，如果跳转到用户没有权限的页面会报错
+      // 下面的功能是，重新登录后跳转到退出前的页面，如果跳转到用户没有权限的页面会报错
       // this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
@@ -128,9 +130,13 @@ export default {
       margin-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
+        margin-top: 0px; // 5px
         position: relative;
-
+        .user-name {
+          cursor: pointer;
+          font-size: 15px;
+          line-height: 20px;
+        }
         .user-avatar {
           cursor: pointer;
           width: 40px;

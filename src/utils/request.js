@@ -65,7 +65,7 @@ service.interceptors.response.use(
           store.dispatch('user/resetToken').then(() => {
             location.reload()
           })
-        })
+        }).catch(e => { })
       } else
       //  50016: Auth fail;
       if (res.code === 50016) {
@@ -79,7 +79,7 @@ service.interceptors.response.use(
           store.dispatch('user/resetToken').then(() => {
             location.reload()
           })
-        })
+        }).catch(e => { })
       }
       return Promise.reject(new Error(res.msg || 'Error'))
     } else {

@@ -44,7 +44,7 @@ export default {
     padding-top: 14px;
   }
   .large-bell{
-    font-size: 22px;
+    font-size: 20px;
     color: #909399;
   }
   .right-menu-bell{
