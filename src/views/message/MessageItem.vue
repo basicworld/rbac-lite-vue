@@ -9,10 +9,10 @@
       </el-col>
       <el-col :xs="24" :span="22">
         <div class="item-meta">
-          <span>来自 {{ itemData.sender }} 的消息 · {{ itemData.createTime }}</span>
+          <span>来自 {{ itemData.sender }} 的消息 · {{ itemData.createTime }} · {{ itemData.hasRead?'已读':'未读' }}</span>
           <div style="float: right;">
             <transition name="el-fade-in">
-              <el-button v-show="itemData.hasRead===0" :type="device!=='mobile'?'text':'primary'" plain @click="markItemAsRead">标为已读</el-button>
+              <el-button v-show="itemData.hasRead===0" type="text" @click="markItemAsRead">标为已读</el-button>
             </transition>
           </div>
         </div>
@@ -115,11 +115,11 @@ export default {
   }
   .item-title {
     font-weight: bold;
-    margin-top: 5px;
+    margin-top: 10px;
     color: #303133;
   }
   .item-content {
-    margin-top: 5px;
-    color: #606266;
+    margin-top: 8px;
+    color: #303133;
   }
 </style>

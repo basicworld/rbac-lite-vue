@@ -35,7 +35,7 @@
       <el-table-column prop="nickName" label="昵称" />
       <!-- <el-table-column prop="deptName" label="部门" /> -->
       <el-table-column prop="email" label="邮箱" min-width="140" />
-      <el-table-column prop="status" label="启用">
+      <el-table-column prop="status" label="用户状态">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.status === 0" size="small" type="success">启用</el-tag>
           <el-tag v-if="scope.row.status !== 0" size="small" type="danger">停用</el-tag>

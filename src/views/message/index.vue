@@ -5,12 +5,11 @@
       <el-col :span="18" :xs="24">
         <!-- 操作按钮 -->
         <div style="margin-bottom: 20px;">
-          <el-button :type="device!=='mobile'?'text':'primary'" plain @click="markShowingMessageAsRead">本页已读</el-button>
-          <el-button :type="device!=='mobile'?'text':'primary'" plain @click="markAllMessageAsRead">全部已读</el-button>
-          <div style="float: right;">
-            <el-button :type="device!=='mobile'?'text':'primary'" icon="el-icon-refresh" plain @click="refreshNow">刷新</el-button>
-            <el-checkbox v-model="queryParams.unreadTop" style="margin-left: 20px;" :border="device==='mobile'">未读置顶</el-checkbox>
-          </div>
+          <el-button type="primary" size="small" plain @click="markShowingMessageAsRead">本页已读</el-button>
+          <el-button type="primary" size="small" plain @click="markAllMessageAsRead">全部已读</el-button>
+          <el-button type="primary" size="small" icon="el-icon-refresh" plain @click="refreshNow">刷新</el-button>
+          <el-checkbox v-model="queryParams.unreadTop" style="margin-left: 20px;" size="small" :border="device==='mobile'">未读置顶</el-checkbox>
+          <div style="float: right;" />
         </div>
 
         <!-- 展示区 -->
